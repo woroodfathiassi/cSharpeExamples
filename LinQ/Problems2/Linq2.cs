@@ -1,6 +1,4 @@
-﻿using LinQ.Problems1;
-
-namespace LinQ.Problems2;
+﻿namespace LinQ.Problems2;
 
 public class Linq2
 {
