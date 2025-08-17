@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection", "Depe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinQ", "LinQ\LinQ.csproj", "{80332789-DCFF-4543-BFFE-08005F80B18A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalog", "BookCatalog\BookCatalog.csproj", "{FE355908-EC4E-40B2-9D4D-47D12EC4E105}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{80332789-DCFF-4543-BFFE-08005F80B18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80332789-DCFF-4543-BFFE-08005F80B18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80332789-DCFF-4543-BFFE-08005F80B18A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE355908-EC4E-40B2-9D4D-47D12EC4E105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE355908-EC4E-40B2-9D4D-47D12EC4E105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE355908-EC4E-40B2-9D4D-47D12EC4E105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE355908-EC4E-40B2-9D4D-47D12EC4E105}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
