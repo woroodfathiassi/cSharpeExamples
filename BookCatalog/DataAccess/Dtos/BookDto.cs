@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookCatalog.DataAccess;
+namespace BookCatalog.DataAccess.Dtos;
 
 public class BookDto
 {
@@ -14,7 +14,7 @@ public class BookDto
     public required string Author { get; set; }
 
     [Required, StringLength(100)]
-    public required string Genre { get; set; } 
+    public required string Genre { get; set; }
 
     [Range(1, 9999)]
     public int PublishedYear { get; set; }

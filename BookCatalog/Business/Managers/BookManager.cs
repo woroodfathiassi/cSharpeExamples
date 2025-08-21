@@ -1,7 +1,9 @@
-﻿using BookCatalog.DataAccess;
+﻿using BookCatalog.Business.Interfaces;
+using BookCatalog.DataAccess;
+using BookCatalog.DataAccess.Dtos;
 using BookCatalog.Mappers;
 
-namespace BookCatalog.Business;
+namespace BookCatalog.Business.Managers;
 
 public class BookManager(ICsvBookRepository csvBookRepository) : IBookManager
 {
@@ -34,7 +36,7 @@ public class BookManager(ICsvBookRepository csvBookRepository) : IBookManager
         // pagination
         query = query.Skip((page - 1) * pageSize).Take(pageSize);
 
-        return query.Select(BookMapper.ToDto).ToList();  
+        return query.Select(BookMapper.ToDto).ToList();
     }
 
     public BookDto? GetBookById(int id)

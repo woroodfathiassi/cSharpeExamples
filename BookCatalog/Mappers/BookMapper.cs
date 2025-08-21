@@ -1,4 +1,5 @@
 ﻿using BookCatalog.DataAccess;
+using BookCatalog.DataAccess.Dtos;
 
 namespace BookCatalog.Mappers;
 

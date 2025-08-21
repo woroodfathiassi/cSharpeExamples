@@ -1,6 +1,6 @@
-﻿using BookCatalog.DataAccess;
+﻿using BookCatalog.DataAccess.Dtos;
 
-namespace BookCatalog.Business;
+namespace BookCatalog.Business.Interfaces;
 
 public interface IBookManager
 {

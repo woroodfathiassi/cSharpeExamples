@@ -1,11 +1,13 @@
-﻿using BookCatalog.Business;
-using BookCatalog.DataAccess;
+﻿using BookCatalog.Business.Interfaces;
+using BookCatalog.DataAccess.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCatalog.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
+//[Authorize]
 public class BookController(IBookManager bookManager) : ControllerBase
 {
     private readonly IBookManager _bookManager = bookManager;
@@ -33,20 +35,9 @@ public class BookController(IBookManager bookManager) : ControllerBase
         if (book == null) return NotFound(new { message = "Book not found" });
         return Ok(book);
     }
-    //[HttpGet]
-    //public ActionResult<List<BookDto>> GetBooks()
-    //{
-    //    try
-    //    {
-    //        return Ok(_bookManager.GetBooks());
-    //    }
-    //    catch(Exception ex)
-    //    {
-    //        return StatusCode(500, new { message = "Server error", error = ex.Message });
-    //    }
-    //}
-
+  
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public IActionResult AddBook([FromBody] BookDto dto)
     {
         try
@@ -61,6 +52,7 @@ public class BookController(IBookManager bookManager) : ControllerBase
     }
 
     [HttpPut]
+    [Authorize(Roles = "Admin")]
     public IActionResult UpdateBook([FromBody] BookDto dto)
     {
         try
@@ -75,6 +67,7 @@ public class BookController(IBookManager bookManager) : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
     public IActionResult DeleteBook(int id)
     {
         try
