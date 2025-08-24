@@ -1,4 +1,4 @@
-﻿namespace BookCatalog.DataAccess;
+﻿namespace BookCatalog.DataAccess.Models;
 
 public class Book
 {
@@ -6,7 +6,7 @@ public class Book
 
     public required string Title { get; set; }
 
-    public required string Author { get; set; } 
+    public required string Author { get; set; }
     public required string Genre { get; set; }
 
     public int PublishedYear { get; set; }

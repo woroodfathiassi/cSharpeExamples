@@ -1,11 +1,41 @@
 using BookCatalog.Business.Interfaces;
 using BookCatalog.Business.Managers;
-using BookCatalog.DataAccess;
+using BookCatalog.DataAccess.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Filters;
 using System.Text;
 
+//Log.Logger = new LoggerConfiguration()
+//            .MinimumLevel.Information() // capture Info and above
+//            .WriteTo.Console()          // also log to console
+//            .WriteTo.File("Logs/log-.txt",
+//                          rollingInterval: RollingInterval.Day, // new file per day
+//                          //retainedFileCountLimit: 7,           // keep last 7 days
+//                          shared: true)                        // multi-process safe
+//            .CreateLogger();
+
+
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Information()
+//    .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
+//    .WriteTo.Logger(lc => lc
+//        .Filter.ByIncludingOnly(Matching.FromSource("RestApiProject.Services.BookService"))
+//        .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day))
+//    .CreateLogger();
+
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(builder.Configuration)
+            .CreateLogger();
+
+builder.Host.UseSerilog();
+
+//builder.Logging.ClearProviders(); // remove default console logging
+//builder.Logging.AddSerilog();     // use only Serilog
+
 
 builder.Services.AddCors(options =>
 {

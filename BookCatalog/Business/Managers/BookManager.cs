@@ -1,13 +1,14 @@
 ﻿using BookCatalog.Business.Interfaces;
-using BookCatalog.DataAccess;
 using BookCatalog.DataAccess.Dtos;
+using BookCatalog.DataAccess.Repositories;
 using BookCatalog.Mappers;
 
 namespace BookCatalog.Business.Managers;
 
-public class BookManager(ICsvBookRepository csvBookRepository) : IBookManager
+public class BookManager(ICsvBookRepository csvBookRepository, ILogger<BookManager> logger) : IBookManager
 {
     private readonly ICsvBookRepository _repository = csvBookRepository;
+    private readonly ILogger<BookManager> _logger = logger;
     public List<BookDto> GetBooks(string? author = null, string? genre = null, int? year = null,
                               string? sortBy = null, bool ascending = true,
                               int page = 1, int pageSize = 10)
@@ -47,18 +48,45 @@ public class BookManager(ICsvBookRepository csvBookRepository) : IBookManager
 
     public void AddBook(BookDto dto)
     {
-        var book = BookMapper.ToEntity(dto);
-        _repository.AddBook(book);
+        try
+        {
+            var book = BookMapper.ToEntity(dto);
+            _repository.AddBook(book);
+            _logger.LogInformation("Book added: {Title}, Id: {Id}", book.Title, book.Id);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error adding book: {Title}", dto.Title);
+            throw; // Rethrow to let Controller handle response
+        }
     }
 
     public void UpdateBook(BookDto dto)
     {
-        var book = BookMapper.ToEntity(dto);
-        _repository.UpdateBook(book);
+        try
+        {
+            var book = BookMapper.ToEntity(dto);
+            _repository.UpdateBook(book);
+            _logger.LogInformation("Book updated: {Title}, Id: {Id}", book.Title, book.Id);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error updating book: {Title}", dto.Title);
+            throw;
+        }
     }
 
     public void DeleteBook(int id)
     {
-        _repository.DeleteBook(id);
+        try
+        {
+            _repository.DeleteBook(id);
+            _logger.LogInformation("Book deleted: Id {Id}", id);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting book: Id {Id}", id);
+            throw;
+        }
     }
 }

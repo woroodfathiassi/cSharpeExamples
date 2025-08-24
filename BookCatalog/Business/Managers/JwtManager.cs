@@ -1,5 +1,5 @@
 ﻿using BookCatalog.Business.Interfaces;
-using BookCatalog.DataAccess;
+using BookCatalog.DataAccess.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

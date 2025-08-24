@@ -1,6 +1,7 @@
-﻿using System.Globalization;
+﻿using BookCatalog.DataAccess.Models;
+using System.Globalization;
 
-namespace BookCatalog.DataAccess
+namespace BookCatalog.DataAccess.Repositories
 {
     public class CsvBookRepository : ICsvBookRepository
     {
@@ -10,12 +11,18 @@ namespace BookCatalog.DataAccess
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            return config["FilePath"];
+            return config["BooksFilePath"];
         }
 
         public List<Book> ReadBooksFromCsv(string filePath)
         {
             var books = new List<Book>();
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine($"File not found: {filePath}");
+                return books; // return empty list if file missing
+            }
+
             string[] lines = File.ReadAllLines(filePath);
 
             for (int i = 1; i < lines.Length; i++)
@@ -45,9 +52,15 @@ namespace BookCatalog.DataAccess
 
         private void WriteBooksToCsv(string filePath, List<Book> books)
         {
+            var directory = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
             var lines = new List<string>
             {
-                "Id,Title,Author,Genre,PublishedYear,Price" 
+                "Id,Title,Author,Genre,PublishedYear,Price"
             };
 
             lines.AddRange(books.Select(b =>
@@ -59,6 +72,7 @@ namespace BookCatalog.DataAccess
         public List<Book> GetBooks()
         {
             string filePath = GetFilePath();
+            Console.WriteLine(filePath);
             return ReadBooksFromCsv(filePath);
         }
 
@@ -88,7 +102,9 @@ namespace BookCatalog.DataAccess
 
         public void DeleteBook(int id)
         {
+            Console.WriteLine("Worood Assi");
             var filePath = GetFilePath();
+            Console.WriteLine(filePath);
             var books = ReadBooksFromCsv(filePath);
 
             var book = books.FirstOrDefault(b => b.Id == id) ?? throw new Exception("Book not found");

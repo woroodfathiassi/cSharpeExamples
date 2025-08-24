@@ -1,6 +1,7 @@
-﻿namespace BookCatalog.DataAccess;
+﻿namespace BookCatalog.DataAccess.Models;
 
-public enum Roles{
+public enum Roles
+{
     Admin,
     Customer
 }

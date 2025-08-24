@@ -1,4 +1,4 @@
-﻿using BookCatalog.DataAccess;
+﻿using BookCatalog.DataAccess.Models;
 
 namespace BookCatalog.Data;
 

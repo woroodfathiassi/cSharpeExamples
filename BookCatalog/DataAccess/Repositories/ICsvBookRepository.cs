@@ -1,4 +1,6 @@
-﻿namespace BookCatalog.DataAccess;
+﻿using BookCatalog.DataAccess.Models;
+
+namespace BookCatalog.DataAccess.Repositories;
 
 public interface ICsvBookRepository
 {
