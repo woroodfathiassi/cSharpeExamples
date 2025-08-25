@@ -21,4 +21,5 @@ public class BookDto
 
     [Range(0, 1_000_000)]
     public decimal Price { get; set; }
+    public string Description {  get; set; }
 }

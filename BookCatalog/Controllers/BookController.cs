@@ -24,6 +24,7 @@ public class BookController(IBookManager bookManager) : ControllerBase
         [FromQuery] int pageSize = 10)
     {
         var books = _bookManager.GetBooks(author, genre, year, sortBy, ascending, page, pageSize);
+        Console.WriteLine(books.Count());
         return Ok(books);
     }
 
@@ -32,52 +33,43 @@ public class BookController(IBookManager bookManager) : ControllerBase
     public ActionResult<BookDto> GetBookById(int id)
     {
         var book = _bookManager.GetBookById(id);
-        if (book == null) return NotFound(new { message = "Book not found" });
+        //if (book == null) return NotFound(new { message = "Book not found" });
         return Ok(book);
     }
-  
+
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public IActionResult AddBook([FromBody] BookDto dto)
     {
-        try
-        {
-            _bookManager.AddBook(dto);
-            return Ok(new { message = "Book added successfully" });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Error adding book", error = ex.Message });
-        }
+        _bookManager.AddBook(dto);
+        return CreatedAtAction(nameof(GetBookById), new { id = dto.Id }, dto);
     }
 
     [HttpPut]
     [Authorize(Roles = "Admin")]
     public IActionResult UpdateBook([FromBody] BookDto dto)
     {
-        try
-        {
-            _bookManager.UpdateBook(dto);
-            return Ok(new { message = "Book updated successfully" });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Error updating book", error = ex.Message });
-        }
+        _bookManager.UpdateBook(dto);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
     [Authorize(Roles = "Admin")]
     public IActionResult DeleteBook(int id)
     {
-        try
-        {
-            _bookManager.DeleteBook(id);
-            return Ok(new { message = "Book deleted successfully" });
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new { message = "Error deleting book", error = ex.Message });
-        }
+        if (id < 0) return NotFound(new { message = "Id should be greater than 0!" });
+        _bookManager.DeleteBook(id);
+        return NoContent();
     }
+
+    [HttpGet()]
+    public ActionResult<List<BookDto>> SearchBooks([FromQuery] string query)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+            return BadRequest(new { error = "Query parameter is required" });
+
+        var results = _bookManager.SearchBooks(query);
+        return Ok(results);
+    }
+
 }

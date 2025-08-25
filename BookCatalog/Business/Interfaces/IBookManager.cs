@@ -12,4 +12,5 @@ public interface IBookManager
     void AddBook(BookDto dto);
     void UpdateBook(BookDto dto);
     void DeleteBook(int id);
+    List<BookDto> SearchBooks(string query);
 }

@@ -43,7 +43,7 @@ public class BookManager(ICsvBookRepository csvBookRepository, ILogger<BookManag
     public BookDto? GetBookById(int id)
     {
         var book = _repository.GetBooks().FirstOrDefault(b => b.Id == id);
-        return book == null ? null : BookMapper.ToDto(book);
+        return book == null ? throw new KeyNotFoundException("Book not found") : BookMapper.ToDto(book);
     }
 
     public void AddBook(BookDto dto)
@@ -52,7 +52,7 @@ public class BookManager(ICsvBookRepository csvBookRepository, ILogger<BookManag
         {
             var book = BookMapper.ToEntity(dto);
             _repository.AddBook(book);
-            _logger.LogInformation("Book added: {Title}, Id: {Id}", book.Title, book.Id);
+            _logger.LogInformation("Book added: {Title}", book.Title);
         }
         catch (Exception ex)
         {
@@ -89,4 +89,22 @@ public class BookManager(ICsvBookRepository csvBookRepository, ILogger<BookManag
             throw;
         }
     }
+
+    public List<BookDto> SearchBooks(string query)
+    {
+        var books = _repository.GetBooks();
+
+        var results = books
+            .Where(b =>
+                (!string.IsNullOrEmpty(b.Title) &&
+                 b.Title.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
+                (!string.IsNullOrEmpty(b.Description) &&
+                 b.Description.Contains(query, StringComparison.OrdinalIgnoreCase))
+            )
+            .Select(BookMapper.ToDto)
+            .ToList();
+
+        return results;
+    }
+
 }

@@ -1,5 +1,6 @@
 ﻿using BookCatalog.DataAccess.Models;
 using System.Globalization;
+using Microsoft.Extensions.Configuration;
 
 namespace BookCatalog.DataAccess.Repositories
 {
@@ -25,10 +26,10 @@ namespace BookCatalog.DataAccess.Repositories
 
             string[] lines = File.ReadAllLines(filePath);
 
-            for (int i = 1; i < lines.Length; i++)
+            for (int i = 1; i < lines.Length; i++) // skip header
             {
                 var parts = lines[i].Split(',', StringSplitOptions.TrimEntries);
-                if (parts.Length != 6) continue;
+                //if (parts.Length != 7) continue; // FIX: expect 7 columns (including description)
 
                 try
                 {
@@ -39,7 +40,8 @@ namespace BookCatalog.DataAccess.Repositories
                         Author = parts[2],
                         Genre = parts[3],
                         PublishedYear = int.Parse(parts[4]),
-                        Price = decimal.Parse(parts[5], CultureInfo.InvariantCulture)
+                        Price = decimal.Parse(parts[5], CultureInfo.InvariantCulture),
+                        Description = parts[6], // FIX: keep description
                     });
                 }
                 catch (Exception ex)
@@ -47,6 +49,7 @@ namespace BookCatalog.DataAccess.Repositories
                     Console.WriteLine($"Error parsing line {i + 1}: {ex.Message}");
                 }
             }
+            Console.WriteLine("Worood : "+books.Count());
             return books;
         }
 
@@ -60,11 +63,13 @@ namespace BookCatalog.DataAccess.Repositories
 
             var lines = new List<string>
             {
-                "Id,Title,Author,Genre,PublishedYear,Price"
+                // FIX: include Description column
+                "Id,Title,Author,Genre,PublishedYear,Price,Description"
             };
 
             lines.AddRange(books.Select(b =>
-                $"{b.Id},{b.Title},{b.Author},{b.Genre},{b.PublishedYear},{b.Price.ToString(CultureInfo.InvariantCulture)}"));
+                $"{b.Id},{b.Title},{b.Author},{b.Genre},{b.PublishedYear},{b.Price.ToString(CultureInfo.InvariantCulture)},{b.Description}"
+            ));
 
             File.WriteAllLines(filePath, lines);
         }
@@ -102,9 +107,7 @@ namespace BookCatalog.DataAccess.Repositories
 
         public void DeleteBook(int id)
         {
-            Console.WriteLine("Worood Assi");
             var filePath = GetFilePath();
-            Console.WriteLine(filePath);
             var books = ReadBooksFromCsv(filePath);
 
             var book = books.FirstOrDefault(b => b.Id == id) ?? throw new Exception("Book not found");

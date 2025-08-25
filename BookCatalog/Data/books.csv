@@ -1,25 +1,20 @@
-Id,Title,Author,Genre,PublishedYear,Price
-1,The Great Gatsby,F. Scott Fitzgerald,Fiction,1925,10.99
-3,1984,George Orwell,Dystopian,1949,9.5
-4,Pride and Prejudice,Jane Austen,Romance,1813,7.25
-5,The Hobbit,J.R.R. Tolkien,Fantasy,1937,12.75
-7,War and Peace,Leo Tolstoy,Historical,1869,14.3
-8,The Catcher in the Rye,J.D. Salinger,Fiction,1951,9.1
-9,The Lord of the Rings,J.R.R. Tolkien,Fantasy,1954,20
-10,Brave New World,Aldous Huxley,Dystopian,1932,8.75
-11,Crime and Punishment,Fyodor Dostoevsky,Philosophical,1866,13.5
-12,The Odyssey,Homer,Classic,800,15.0
-13,Jane Eyre,Charlotte Brontë,Romance,1847,9.8
-14,The Divine Comedy,Dante Alighieri,Classic,1320,18.4
-15,Animal Farm,George Orwell,Political Satire,1945,6.9
-16,Wuthering Heights,Emily Brontë,Romance,1847,8.4
-17,Les Misérables,Victor Hugo,Historical,1862,14.75
-18,The Alchemist,Paulo Coelho,Fiction,1988,11.2
-19,Dracula,Bram Stoker,Horror,1897,7.9
-20,The Chronicles of Narnia,C.S. Lewis,Fantasy,1950,19.5
-21,Hello World,Ci Cii,Fiction,2005,50
-22,Hello World,Ci Cii,Fiction,2005,50
-23,Hello World,Ci Cii,Fiction,2005,50
-24,Hello World,Ci Cii,Fiction,2005,50
-25,Hello World,Ci Cii,Fiction,2005,50
-26,Hello World,Ci Cii,Fiction,2005,50
+Id,Title,Author,Genre,PublishedYear,Price,Description
+1,The Great Gatsby,F. Scott Fitzgerald,Fiction,1925,10.99,A tragic story of wealth, love, and the American Dream set in the Jazz Age.
+3,1984,George Orwell,Dystopian,1949,9.5,A chilling vision of a totalitarian future ruled by surveillance and control.
+4,Pride and Prejudice,Jane Austen,Romance,1813,7.25,A witty romance exploring love, class, and social expectations in 19th-century England.
+5,The Hobbit,J.R.R. Tolkien,Fantasy,1937,12.75,A hobbit embarks on an unexpected journey filled with dragons, treasure, and bravery.
+7,War and Peace,Leo Tolstoy,Historical,1869,14.3,A sweeping tale of love and conflict during the Napoleonic wars in Russia.
+8,The Catcher in the Rye,J.D. Salinger,Fiction,1951,9.1,A rebellious teenager struggles with identity, loss, and the hypocrisy of adulthood.
+9,The Lord of the Rings,J.R.R. Tolkien,Fantasy,1954,20,A grand epic of fellowship, courage, and the battle against evil in Middle-earth.
+10,Brave New World,Aldous Huxley,Dystopian,1932,8.75,A futuristic society shaped by technology, control, and the loss of individuality.
+11,Crime and Punishment,Fyodor Dostoevsky,Philosophical,1866,13.5,A psychological study of guilt, morality, and redemption after a crime.
+12,The Odyssey,Homer,Classic,800,15.0,An ancient epic following Odysseus’s perilous journey home after the Trojan War.
+13,Jane Eyre,Charlotte Brontë,Romance,1847,9.8,A governess’s struggle for love, independence, and moral integrity.
+14,The Divine Comedy,Dante Alighieri,Classic,1320,18.4,An allegorical journey through Hell, Purgatory, and Paradise.
+15,Animal Farm,George Orwell,Political Satire,1945,6.9,A satirical allegory about power and corruption told through farm animals.
+16,Wuthering Heights,Emily Brontë,Romance,1847,8.4,A dark and passionate story of love, revenge, and obsession on the Yorkshire moors.
+17,Les Misérables,Victor Hugo,Historical,1862,14.75,A story of justice, redemption, and revolution in 19th-century France.
+18,The Alchemist,Paulo Coelho,Fiction,1988,11.2,A philosophical tale about pursuing one’s dreams and personal legend.
+19,Dracula,Bram Stoker,Horror,1897,7.9,A gothic horror about the infamous vampire Count Dracula and his pursuit of blood.
+20,The Chronicles of Narnia,C.S. Lewis,Fantasy,1950,19.5,A magical world of talking animals and epic battles between good and evil.
+21,Hello World,Ci Cii,Fiction,2005,50,A modern tale exploring technology, humanity, and the meaning of connection.

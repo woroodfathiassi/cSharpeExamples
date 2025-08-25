@@ -12,4 +12,5 @@ public class Book
     public int PublishedYear { get; set; }
 
     public decimal Price { get; set; }
+    public string Description { get; set; }
 }

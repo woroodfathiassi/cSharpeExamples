@@ -16,7 +16,8 @@ public class BookMapper
             Author = book.Author,
             Genre = book.Genre,
             PublishedYear = book.PublishedYear,
-            Price = book.Price
+            Price = book.Price,
+            Description = book.Description,
         };
     }
 
@@ -31,7 +32,8 @@ public class BookMapper
             Author = dto.Author,
             Genre = dto.Genre,
             PublishedYear = dto.PublishedYear,
-            Price = dto.Price
+            Price = dto.Price,
+            Description = dto.Description,
         };
     }
 }

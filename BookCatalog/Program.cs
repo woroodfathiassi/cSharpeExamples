@@ -1,10 +1,10 @@
 using BookCatalog.Business.Interfaces;
 using BookCatalog.Business.Managers;
 using BookCatalog.DataAccess.Repositories;
+using BookCatalog.Exceptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using Serilog.Filters;
 using System.Text;
 
 //Log.Logger = new LoggerConfiguration()
@@ -17,24 +17,12 @@ using System.Text;
 //            .CreateLogger();
 
 
-//Log.Logger = new LoggerConfiguration()
-//    .MinimumLevel.Information()
-//    .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
-//    .WriteTo.Logger(lc => lc
-//        .Filter.ByIncludingOnly(Matching.FromSource("RestApiProject.Services.BookService"))
-//        .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day))
-//    .CreateLogger();
-
 var builder = WebApplication.CreateBuilder(args);
 
-Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(builder.Configuration)
-            .CreateLogger();
-
-builder.Host.UseSerilog();
-
-//builder.Logging.ClearProviders(); // remove default console logging
-//builder.Logging.AddSerilog();     // use only Serilog
+//Log.Logger = new LoggerConfiguration()
+//            .ReadFrom.Configuration(builder.Configuration)
+//            .CreateLogger();
+//builder.Host.UseSerilog();
 
 
 builder.Services.AddCors(options =>
@@ -57,6 +45,9 @@ builder.Services.AddScoped<IBookManager, BookManager>();
 builder.Services.AddScoped<ICsvBookRepository, CsvBookRepository>();
 builder.Services.AddScoped<IJwtManager, JwtManager>();
 builder.Services.AddScoped<IAuthManager, AuthManager>();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 var secretKey = "yv78r65rvZ76t87#y$W&970kv#nj67365jBIb!bbkhLHIHDOQD:N*%z4rtv76hgfjxvy";
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
@@ -82,6 +73,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();  
 }
 
+app.UseExceptionHandler();
+//app.UseMiddleware<ErrorHandlerMiddleware>();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
